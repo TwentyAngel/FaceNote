@@ -20,10 +20,7 @@ Este proyecto forma parte del portafolio como programador de TwentyAngel.
    cd "C:/Users/TuUsuario/Downloads/facenote"
    (Cambia la ruta por la ubicación real en tu PC)
 
-3. Instalar dependencias:
-   npm install
-
-4. Configurar la base de datos:
+3. Configurar la base de datos:
    - Si usas MongoDB Local: asegúrate de que el servicio esté corriendo y usa una cadena como:
      mongodb://127.0.0.1:27017/facenote
 
@@ -31,10 +28,10 @@ Este proyecto forma parte del portafolio como programador de TwentyAngel.
      mongodb+srv://<usuario>:<password>@cluster0.mongodb.net/facenote
      (Reemplaza <usuario> y <password> con tus credenciales)
 
-5. Ejecutar el servidor:
+4. Ejecutar el servidor:
    node server.js
 
-6. Abrir el navegador en:
+5. Abrir el navegador en:
    http://localhost:3000
    (o el puerto que defina tu server.js)
 
