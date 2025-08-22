@@ -14,7 +14,7 @@ Este proyecto forma parte del portafolio como programador de TwentyAngel.
 # Instalación y ejecución:
 
 1. Clonar este repositorio:
-   git clone https://github.com/TuUsuario/FaceNote.git
+   git clone https://github.com/TwentyAngel/FaceNote.git
 
 2. Entrar en la carpeta del proyecto:
    cd "C:/Users/TuUsuario/Downloads/facenote"
