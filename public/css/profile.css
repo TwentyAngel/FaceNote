@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #383434;
+    margin: 0;
+    padding: 0;
+}
+
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.back {
+    padding: 32px 0;
+    background-color: #2a394f;
+}
+
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+.logo {
+    font-size:24px;
+    color: #15a4f9;
+    font-weight: 800;
+}
+
+.menu .navbar ul li {
+    position: relative;
+    float: left;
+
+}
+
+.menu .navbar ul li a {
+    font-size: 18px;
+    padding: 20px;
+    color: #ffff;
+    display: block;
+
+}
+
+.menu .navbar ul li a:hover {
+    color: #15a4f9;
+}
+
+#menu {
+    display: none;
+}
+
+.menu-icon {
+    width: 25px;
+}
+
+.menu label {
+    cursor: pointer;
+    display: none;
+}
+
+@media(max-width:991px) {
+
+    .menu {
+        padding: 30px;
+    }
+
+    .menu label {
+        display: initial;
+    }
+
+    .back {
+        padding: 40px 0;
+    }
+
+    .menu .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #2a394f;
+        display: none;
+    }
+
+    .menu .navbar ul li {
+        width: 100%;
+    }
+
+    #menu:checked ~ .navbar {
+        display: initial;
+    }
+
+}
+
+
+.profile-header {
+    width: 100%;
+    height: 200px;
+    background: url('wall.jpg') no-repeat center/cover;
+    border-radius: 15px;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f5f5;
+    position: relative;
+    top: -50px;
+    margin: auto;
+    max-width: 600px;
+    border-radius: 20px;
+}
+
+.profile-info img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    border: 3px solid #f8f5f5;
+}
+
+.profile-info .details {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-info .details h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.profile-info .details p {
+    margin: 5px 0 0;
+    color: #666;
+}
+
+.extra-info {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    width: 50%;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    text-align: left;
+}
+
+.extra-info p {
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Publicaciones de amigos */
+.mensaje {
+    background-color: #2a394f; /* Fondo oscuro a tono con el diseño */
+    border: 1px solid #ddd; /* Borde sutil */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Espaciado entre los mensajes */
+    font-size: 16px; /* Tamaño de fuente */
+    color: #fff; /* Texto en blanco para contraste */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para resaltar */
+    margin-left: 340px;
+    margin-right: 340px;
+    margin-top: 50px;
+    text-align: left;
+}
+
+/* Estilo del encabezado del mensaje (fecha o usuario) */
+.mensaje strong {
+    margin-top: 15px;
+    color: #15a4f9; /* Color azul característico */
+    display: block; /* Colocar la fecha o usuario en su propia línea */
+    margin-bottom: 5px; /* Espaciado inferior */
+    font-size: 20px;
+}
+
+.date {
+    color: #7c7676;
+    font-size: 11px;
+}
+
+.mensaje p {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.mensaje img {
+    width: 40px;
+    height: 40px;
+}
+
+.mensaje button {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    padding: 0; /* Elimina espacios internos */
+    cursor: pointer; /* Mantiene la funcionalidad de clic */
+}
+
+.mensaje button img {
+    display: inline-block; /* Asegura que la imagen se comporte correctamente */
+    width: 40px; /* Ajusta el tamaño según necesidad */
+    height: auto;
+}
+
+.likes {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 10px;
+    color: #83cff1;
+}
+
+#edit-profile {
+    background-color: #15a4f9; /* Azul característico */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    display: inline-block; /* Lo mantiene en la misma línea */
+    vertical-align: middle; /* Alineación con el texto */
+}
+
+#edit-profile:hover {
+    background-color: #0d8cd6;
+}
+
+.load {
+    text-align: center;
+    color: #f8f5f5;
+}

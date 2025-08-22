@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>FaceNote: Iniciar Sesión</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style2.css" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="back">
+        <div class="menu container">
+            <a href="#" class="logo">FaceNote</a>
+            <input type="checkbox" id="menu"/>
+            <label for="menu">
+                <img class="menu-icon" src="images/menu.png" alt="menu">
+            </label>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="profile.html">Perfil</a></li>
+                    <li><a href="friends.html">Amigos</a></li>
+                    <li><a href="log.html">Iniciar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- FORMULARIO PARA INICIO DE SESIÓN Y REGISTRO -->
+<section class="login-registro">
+    <div class="container">
+        <form id="formulario-login">
+            <h2>Iniciar Sesión</h2>
+            <label for="email-login">Correo Electrónico:</label>
+            <input type="email" id="email-login" placeholder="Ingresa tu correo" required/>
+            <label for="password-login">Contraseña:</label>
+            <input type="password" id="password-login" placeholder="Ingresa tu contraseña" required/>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+
+        <form id="formulario-registro">
+            <h2>Registrarse</h2>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" placeholder="Ingresa tu nombre" required/>
+            
+            <label for="email-registro">Correo Electrónico:</label>
+            <input type="email" id="email-registro" placeholder="Ingresa tu correo" required/>
+            
+            <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+            <input style="margin: 15px" type="date" id="fecha-nacimiento" required/>
+            
+            <label for="password-registro">Contraseña:</label>
+            <input type="password" id="password-registro" placeholder="Crea una contraseña" required/>
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+</section>
+
+<script>
+    // Manejador de registro
+    document.getElementById('formulario-registro').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email-registro').value;
+        const fechaNacimiento = document.getElementById('fecha-nacimiento').value;
+        const password = document.getElementById('password-registro').value;
+
+        try {
+            const response = await fetch('/registro', { // 🔗 Ruta relativa
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre, email, fechaNacimiento, password })
+            });
+
+            const result = await response.text();
+            alert('Registro exitoso, inicia sesion ahora.');
+            setTimeout(() => window.location.href = "log.html", 1000);
+        } catch (error) {
+            alert('Error al registrar: ' + error.message);
+        }
+    });
+
+    // Manejador de inicio de sesión
+    document.getElementById('formulario-login').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('email-login').value;
+        const password = document.getElementById('password-login').value;
+
+        try {
+            const response = await fetch('/login', { // 🔗 Ruta relativa
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                // Guardar el token en localStorage
+                localStorage.setItem('token', result.token);
+                alert('Inicio de sesión exitoso, se te redirigirá a la página de inicio.');
+                setTimeout(() => window.location.href = "index.html", 2000); // Redirige después de 2 segundos
+            } else {
+                alert(result.mensaje || 'Error al iniciar sesión.');
+            }
+        } catch (error) {
+            alert('Error al iniciar sesión: ' + error.message);
+        }
+    });
+</script>
+</body>
+</html>

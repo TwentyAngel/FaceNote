@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    background-color: #383434;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.back {
+    padding: 32px 0;
+    background-color: #2a394f;
+}
+
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+.logo {
+    font-size:24px;
+    color: #15a4f9;
+    font-weight: 800;
+}
+
+.menu .navbar ul li {
+    position: relative;
+    float: left;
+
+}
+
+.menu .navbar ul li a {
+    font-size: 18px;
+    padding: 20px;
+    color: #ffff;
+    display: block;
+
+}
+
+.menu .navbar ul li a:hover {
+    color: #15a4f9;
+}
+
+#menu {
+    display: none;
+}
+
+.menu-icon {
+    width: 25px;
+}
+
+.menu label {
+    cursor: pointer;
+    display: none;
+}
+
+@media(max-width:991px) {
+
+    .menu {
+        padding: 30px;
+    }
+
+    .menu label {
+        display: initial;
+    }
+
+    .back {
+        padding: 40px 0;
+    }
+
+    .menu .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #2a394f;
+        display: none;
+    }
+
+    .menu .navbar ul li {
+        width: 100%;
+    }
+
+    #menu:checked ~ .navbar {
+        display: initial;
+    }
+
+}
+
+p {
+    margin-top: 40px;
+}
+
+
+
+/* Estilo del contenedor de perfil */
+.profile-container {
+    background-color: #2a394f;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Estilos del título */
+.profile-container h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Estilos del texto */
+.profile-container p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #bbbbbb;
+}
+
+/* Botón de cerrar sesión */
+.profile-container button {
+    background-color: #ff4f4f;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.profile-container button:hover {
+    background-color: #cc3c3c;
+}
+
+/* Mensaje de advertencia si no hay sesión */
+.alert {
+    background-color: #ff4f4f;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    margin: 50px;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    margin-top: 30px;
+    border-radius: 60px;
+}

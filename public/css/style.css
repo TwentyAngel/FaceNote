@@ -1,0 +1,238 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    background-color: #383434;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.back {
+    padding: 32px 0;
+    background-color: #2a394f;
+}
+
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+.logo {
+    font-size:24px;
+    color: #15a4f9;
+    font-weight: 800;
+}
+
+.menu .navbar ul li {
+    position: relative;
+    float: left;
+
+}
+
+.menu .navbar ul li a {
+    font-size: 18px;
+    padding: 20px;
+    color: #ffff;
+    display: block;
+
+}
+
+.menu .navbar ul li a:hover {
+    color: #15a4f9;
+}
+
+#menu {
+    display: none;
+}
+
+.menu-icon {
+    width: 25px;
+}
+
+.menu label {
+    cursor: pointer;
+    display: none;
+}
+
+@media(max-width:1000px) {
+
+    .menu {
+        padding: 30px;
+    }
+
+    .menu label {
+        display: initial;
+    }
+
+    .back {
+        padding: 40px 0;
+    }
+
+    .menu .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #2a394f;
+        display: none;
+    }
+
+    .menu .navbar ul li {
+        width: 100%;
+    }
+
+    #menu:checked ~ .navbar {
+        display: initial;
+    }
+
+}
+
+.foro {
+    margin-top: 48px;
+}
+
+/* Contenedor principal del formulario */
+.foro form {
+    background-color: #f0f2f5; /* Color de fondo */
+    border: 1px solid #ddd; /* Borde */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 15px;
+    max-width: 600px;
+    margin: 20px auto; /* Margen superior de 20px y centrado horizontal */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+
+/* Estilo del área de texto */
+.foro textarea {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    height: 80px; /* Altura ajustada */
+    border: 1px solid #ccc; /* Borde del área de texto */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    resize: none; /* Desactiva el ajuste manual del tamaño */
+}
+
+/* Estilo del botón */
+.foro button {
+    background-color: #1877f2; /* Color azul característico de Facebook */
+    color: white; /* Color del texto */
+    padding: 10px 15px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cursor de "manita" al pasar el ratón */
+    margin-top: 10px; /* Espaciado superior */
+}
+
+/* Efecto hover en el botón */
+.foro button:hover {
+    background-color: #155bc0; /* Color más oscuro al pasar el ratón */
+}
+
+.mensaje {
+    background-color: #2a394f; /* Fondo oscuro a tono con el diseño */
+    border: 1px solid #ddd; /* Borde sutil */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Espaciado entre los mensajes */
+    font-size: 16px; /* Tamaño de fuente */
+    color: #fff; /* Texto en blanco para contraste */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para resaltar */
+    margin-left: 340px;
+    margin-right: 340px;
+    margin-top: 50px;
+}
+
+/* Estilo del encabezado del mensaje (fecha o usuario) */
+.mensaje strong {
+    margin-top: 15px;
+    color: #15a4f9; /* Color azul característico */
+    display: block; /* Colocar la fecha o usuario en su propia línea */
+    margin-bottom: 5px; /* Espaciado inferior */
+    font-size: 20px;
+}
+
+.mensaje span {
+    color: #7c7676;
+    font-size: 11px;
+}
+
+.mensaje p {
+    margin-bottom: 15px;
+}
+
+.mensaje img {
+    width: 40px;
+    height: 40px;
+}
+
+.mensaje button {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    padding: 0; /* Elimina espacios internos */
+    cursor: pointer; /* Mantiene la funcionalidad de clic */
+}
+
+.mensaje button img {
+    display: inline-block; /* Asegura que la imagen se comporte correctamente */
+    width: 40px; /* Ajusta el tamaño según necesidad */
+    height: auto;
+}
+
+.likes {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 10px;
+    color: #83cff1;
+}
+
+@media(max-width:991px) {
+    .mensaje {
+        background-color: #2a394f; /* Fondo oscuro a tono con el diseño */
+        border: 1px solid #ddd; /* Borde sutil */
+        border-radius: 10px; /* Bordes redondeados */
+        padding: 10px; /* Espaciado interno */
+        margin-bottom: 10px; /* Espaciado entre los mensajes */
+        font-size: 16px; /* Tamaño de fuente */
+        color: #fff; /* Texto en blanco para contraste */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para resaltar */
+        margin-left: 60px;
+        margin-right: 60px;
+        margin-top: 50px;
+    }
+    
+    /* Estilo del encabezado del mensaje (fecha o usuario) */
+    .mensaje strong {
+        margin-top: 15px;
+        color: #15a4f9; /* Color azul característico */
+        display: block; /* Colocar la fecha o usuario en su propia línea */
+        margin-bottom: 5px; /* Espaciado inferior */
+        font-size: 20px;
+    }
+    
+    .mensaje span {
+        color: #7c7676;
+        font-size: 11px;
+    }
+    
+    .mensaje p {
+        margin-bottom: 15px;
+    }
+    
+}

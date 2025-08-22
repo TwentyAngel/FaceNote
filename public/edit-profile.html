@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceNote: Editar Perfil</title>
+    <link rel="stylesheet" href="css/edit-profile.css">
+</head>
+<body>
+    <header>
+        <div class="back">
+            <div class="menu container">
+                <a href="#" class="logo">FaceNote</a>
+                <input type="checkbox" id="menu"/>
+                <label for="menu">
+                    <img class="menu-icon" src="images/menu.png" alt="menu">
+                </label>
+                <nav class="navbar">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="profile.html">Perfil</a></li>
+                        <li><a href="friends.html">Amigos</a></li>
+                        <li><a href="log.html">Iniciar sesión</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="profile-header"></div>
+
+    <!-- Sección del perfil del usuario -->
+    <div class="profile-info">
+        <div class="profile-image">
+            <img src="images/perfil.jpg" alt="Foto de perfil">
+            <button id="edit-pic" onclick="document.getElementById('upload-pic').click()">
+                ✏️
+            </button>
+            <input type="file" id="upload-pic" accept="image/*" style="display: none;">
+        </div>
+        <div class="details">
+            <h1>Cambiar nombre de usuario:</h1>
+            <input type="text" id="username" placeholder="Ingresa tu nuevo nombre">
+        </div>
+    </div>
+
+    <!-- Información adicional -->
+    <div class="extra-info">
+        <p><strong>Editar correo electrónico:</strong></p>
+        <input type="email" id="email" placeholder="Ingresa tu nuevo correo">
+
+        <button id="save-profile">Guardar cambios</button>
+    </div>
+
+    <script src="scripts/edit-profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>FaceNote: Inicio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="back">
+            <div class="menu container">
+                <a href="#" class="logo">FaceNote</a>
+                <input type="checkbox" id="menu" />
+                <label for="menu">
+                    <img class="menu-icon" src="images/menu.png" alt="menu">
+                </label>
+                <nav class="navbar">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="profile.html">Perfil</a></li>
+                        <li><a href="friends.html">Amigos</a></li>
+                        <li><a href="log.html">Iniciar sesión</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <section class="foro">
+            <form id="formulario-mensaje">
+                <textarea id="mensaje" placeholder="¿En qué estás pensando?" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+
+        <section class="mensajes">
+            <div id="contenedor-mensajes"></div>
+        </section>
+    </header>
+
+    <script>
+        const BACKEND_URL = "http://localhost:3000";
+        const TOKEN = localStorage.getItem("token") || "";
+
+        document.getElementById("formulario-mensaje").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const mensaje = document.getElementById("mensaje").value;
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/mensaje`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": TOKEN
+                    },
+                    body: JSON.stringify({ mensaje })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    alert(errorData.mensaje || "Error al enviar el mensaje");
+                    return;
+                }
+
+                document.getElementById("mensaje").value = "";
+                cargarMensajes();
+            } catch (error) {
+                console.error("Error al enviar mensaje:", error);
+                alert("Ocurrió un error al enviar el mensaje. Por favor, inténtalo de nuevo.");
+            }
+        });
+
+        async function cargarMensajes() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/mensajes`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    alert(errorData.mensaje || "Error al cargar los mensajes");
+                    return;
+                }
+
+                const mensajes = await response.json();
+                const contenedorMensajes = document.getElementById("contenedor-mensajes");
+                contenedorMensajes.innerHTML = "";
+
+                mensajes.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+
+                const usuarioActualId = obtenerUsuarioActualId();
+
+                mensajes.forEach(mensaje => {
+                    const usuarioNombre = mensaje.usuario ? mensaje.usuario.nombre : "Anónimo";
+                    const contenido = mensaje.contenido || "Mensaje no disponible";
+                    const fecha = new Date(mensaje.fecha).toLocaleString();
+                    const likes = mensaje.likes || 0;
+
+                    const divMensaje = document.createElement("div");
+                    divMensaje.className = "mensaje";
+                    divMensaje.innerHTML = `
+                        <strong>${usuarioNombre}</strong>
+                        <span>Publicado el ${fecha}</span>
+                        <br/><br/><p>${contenido}</p>
+                        <button onclick="darMeGusta('${mensaje._id}')">
+                            <img src="images/like.png" alt="Me gusta">
+                        </button>
+                        ${mensaje.usuario && mensaje.usuario._id === usuarioActualId ? `
+                            <button onclick="eliminarMensaje('${mensaje._id}')">
+                                <img src="images/delete.png" alt="Eliminar">
+                            </button>
+                        ` : ''}
+                        <p class="likes">${likes} Likes</p>
+                    `;
+
+                    contenedorMensajes.appendChild(divMensaje);
+                });
+            } catch (error) {
+                console.error("Error al cargar mensajes:", error);
+                alert("Ocurrió un error al cargar los mensajes. Por favor, inténtalo de nuevo.");
+            }
+        }
+
+        async function darMeGusta(id) {
+           try {
+                const response = await fetch(`http://localhost:3000/mensaje/${id}/like`, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": localStorage.getItem("token"),
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                if (!response.ok) {
+                    const data = await response.json();
+                    alert(data.error);
+                }
+
+        // Recargar los mensajes para actualizar el contador de likes
+                const nombreUsuario = document.getElementById("profile-name").textContent;
+                cargarMensajesDelUsuario(nombreUsuario);
+
+            } catch (error) {
+                console.error("Error al dar me gusta:", error);
+            }
+        }
+
+        async function eliminarMensaje(id) {
+            try {
+                const response = await fetch(`${BACKEND_URL}/mensaje/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": TOKEN,
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    alert(errorData.mensaje || "Error al eliminar el mensaje");
+                    return;
+                }
+
+                const data = await response.json();
+                alert(data.mensaje || "Mensaje eliminado correctamente.");
+                cargarMensajes();
+            } catch (error) {
+                console.error("Error al eliminar mensaje:", error);
+                alert("Ocurrió un error al eliminar el mensaje. Por favor, inténtalo de nuevo.");
+            }
+        }
+
+        function obtenerUsuarioActualId() {
+            try {
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    console.warn("No se encontró token en localStorage");
+                    return null;
+                }
+
+                // Validar el formato del token
+                const tokenParts = token.split(".");
+                if (typeof token !== "string" || tokenParts.length !== 3) {
+                    console.error("Formato de token inválido:", token);
+                    return null;
+                }
+
+                // Decodificar y analizar el payload del token
+                try {
+                    const payload = JSON.parse(atob(tokenParts[1]));
+                    console.log("Payload del token:", payload);
+                    return payload.userId;
+                } catch (error) {
+                    console.error("Error al decodificar el payload del token:", error);
+                    return null;
+                }
+            } catch (error) {
+                console.error("Error al obtener el ID del usuario:", error);
+                return null;
+            }
+        }
+
+        function actualizarNavbar() {
+            const token = localStorage.getItem("token");
+            const enlaceSesion = document.querySelector('.navbar ul li a[href="log.html"]');
+
+            if (token) {
+                enlaceSesion.innerText = "Cerrar sesión";
+                enlaceSesion.href = "#";
+                enlaceSesion.onclick = function (event) {
+                    event.preventDefault();
+                    cerrarSesion();
+                };
+            }
+        }
+
+        function cerrarSesion() {
+            localStorage.removeItem("token");
+            window.location.href = "logout.html";
+        }
+
+        // Registrar funciones globales para que funcionen con onclick
+        window.darMeGusta = darMeGusta;
+        window.eliminarMensaje = eliminarMensaje;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            actualizarNavbar();
+            cargarMensajes();
+        });
+    </script>
+</body>
+</html>
