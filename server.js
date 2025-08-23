@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Conexión con MongoDB Atlas
-mongoose.connect('mongodb+srv://Angel:admin2332@facenote.ikezyuw.mongodb.net/?retryWrites=true&appName=facenote', {
+mongoose.connect('Cambialo a tus credenciales de Mongo', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
